@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editorial Gold · Design-Vorlage (Mock)</title>
+  <style>
+    /* =========================================================================
+       EDITORIAL GOLD · DESIGN TOKENS
+       Für neue Projekte einfach diese Farben & Radien anpassen.
+       ========================================================================= */
+    :root {
+      --eg-bg-deep: #12161c;
+      --eg-bg-surface: #1a2028;
+      --eg-bg-elevated: #222933;
+      --eg-gold: #d4af37;
+      --eg-gold-soft: #e6c978;
+      --eg-gold-brushed: #b5892d;
+      --eg-gold-border: rgba(212, 175, 55, 0.28);
+      --eg-cream: #f3ead8;
+      --eg-cream-end: #efe2c8;
+      --eg-ink: #181c22;
+      --eg-ink-muted: #545a64;
+      --eg-text: #f4efe6;
+      --eg-muted: #b8b2a6;
+      --eg-ok: #9fd3b4;
+      --eg-radius: 16px;
+      --eg-font-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+      --eg-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 20px;
+      font-family: var(--eg-font-sans);
+      color: var(--eg-text);
+      background:
+        radial-gradient(circle at 85% 10%, rgba(212, 175, 55, 0.08), transparent 45%),
+        linear-gradient(180deg, var(--eg-bg-deep) 0%, #0e1217 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button { font-family: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+    .container { max-width: 1280px; margin: 0 auto; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      background: var(--eg-bg-surface);
+      border: 1px solid var(--eg-gold-border);
+      border-radius: var(--eg-radius);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 10px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--eg-font-serif); font-size: 20px; font-weight: 700;
+      color: var(--eg-gold-soft);
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+    }
+    .brand-title { font-size: 14px; font-weight: 600; color: var(--eg-cream); }
+    .brand-sub { font-size: 12px; color: var(--eg-muted); }
+
+    .device-switch { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .device-switch-label { font-size: 12px; color: var(--eg-muted); margin-right: 4px; }
+    .pill-btn {
+      padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 500;
+      background: var(--eg-bg-elevated); color: var(--eg-text);
+      border: 1px solid var(--eg-gold-border); transition: all 0.2s;
+    }
+    .pill-btn.active { background: var(--eg-gold); color: var(--eg-ink); border-color: var(--eg-gold); font-weight: 600; }
+
+    /* Viewport Frames */
+    .shell { margin: 0 auto; transition: max-width 0.3s ease; }
+    .shell-desktop { max-width: 1280px; }
+    .shell-tablet {
+      max-width: 860px; border: 10px solid #0b0d11; border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(212, 175, 55, 0.22);
+      overflow: hidden;
+    }
+    .shell-mobile {
+      max-width: 410px; border: 10px solid #0b0d11; border-radius: 34px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(212, 175, 55, 0.22);
+      overflow: hidden;
+    }
+
+    .app-frame {
+      display: flex;
+      background: var(--eg-bg-deep);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      border-radius: var(--eg-radius);
+      overflow: hidden;
+      min-height: 680px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px; flex-shrink: 0;
+      background: #141920;
+      border-right: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 14px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .sidebar-kicker {
+      padding: 8px 10px 14px; font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--eg-gold-soft); font-weight: 600;
+    }
+    .nav-btn {
+      width: 100%; text-align: left; padding: 9px 12px; border-radius: 10px;
+      font-size: 12px; display: flex; align-items: center; gap: 8px;
+      color: var(--eg-muted); margin-bottom: 4px; transition: background 0.15s;
+    }
+    .nav-btn:hover { background: rgba(243, 234, 216, 0.06); }
+    .nav-btn.active { background: rgba(212, 175, 55, 0.16); color: var(--eg-cream); }
+    .theme-pill {
+      padding: 10px 12px; border-radius: 10px; font-size: 12px; color: var(--eg-muted);
+      background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    /* Main Content */
+    .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px 16px;
+      background: rgba(18, 22, 28, 0.94);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    }
+    .tabs { display: flex; gap: 4px; overflow-x: auto; }
+    .tab-btn {
+      padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;
+      color: var(--eg-muted); white-space: nowrap;
+    }
+    .tab-btn.active {
+      background: rgba(212, 175, 55, 0.18); color: var(--eg-gold-soft);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+    .badge {
+      font-size: 11px; padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+      background: rgba(212, 175, 55, 0.14); color: var(--eg-gold-soft);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .view-body { padding: 18px; display: flex; flex-direction: column; gap: 16px; }
+
+    /* Cards */
+    .eg-card {
+      background: var(--eg-bg-surface);
+      border: 1px solid var(--eg-gold-border);
+      border-radius: var(--eg-radius);
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+    .eg-cream-card {
+      background: linear-gradient(180deg, var(--eg-cream) 0%, var(--eg-cream-end) 100%);
+      border: 1px solid rgba(181, 137, 45, 0.35);
+      border-radius: var(--eg-radius);
+      padding: 14px;
+      color: var(--eg-ink);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+    }
+    .eg-gold-btn {
+      width: 100%; text-align: left; padding: 13px 15px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.22), rgba(181, 137, 45, 0.14));
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--eg-cream);
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .eg-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px; font-size: 12px;
+      background: rgba(26, 32, 40, 0.92);
+      border: 1px solid var(--eg-gold-border);
+    }
+    .eg-chip.accent { border-color: rgba(212, 175, 55, 0.55); color: var(--eg-gold-soft); }
+
+    .hero { position: relative; overflow: hidden; }
+    .hero-glow {
+      position: absolute; right: -30px; top: -30px; width: 140px; height: 140px;
+      border-radius: 50%; background: rgba(212, 175, 55, 0.12); filter: blur(28px);
+      pointer-events: none;
+    }
+    .hero-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .hero-title { font-family: var(--eg-font-serif); font-size: 26px; letter-spacing: 0.04em; color: var(--eg-cream); }
+    .hero-greet { font-family: var(--eg-font-serif); font-size: 18px; color: var(--eg-gold-soft); margin-top: 2px; }
+    .hero-sub { font-size: 12px; color: var(--eg-muted); margin-top: 4px; }
+
+    /* Grids */
+    .grid-home { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; align-items: start; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .col-stack { display: flex; flex-direction: column; gap: 12px; }
+    @media (max-width: 900px) {
+      .grid-home, .grid-3 { grid-template-columns: 1fr; }
+    }
+    .is-mobile .grid-home,
+    .is-mobile .grid-2,
+    .is-mobile .grid-3 { grid-template-columns: 1fr; }
+    .is-mobile .mobile-2col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+
+    /* Light Card Controls */
+    .light-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .light-btn { display: flex; align-items: center; gap: 10px; text-align: left; flex: 1; min-width: 0; }
+    .light-icon {
+      width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+      background: rgba(24, 28, 34, 0.08);
+    }
+    .light-icon.on { background: rgba(181, 137, 45, 0.22); }
+    .light-name { font-size: 13px; font-weight: 600; color: var(--eg-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .light-state { font-size: 12px; color: var(--eg-ink-muted); }
+    .light-pill {
+      padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; flex-shrink: 0;
+      background: rgba(24, 28, 34, 0.1); color: var(--eg-ink);
+    }
+    .light-pill.on { background: var(--eg-gold-brushed); color: #fffaf0; }
+
+    input[type="range"].gold-slider {
+      width: 100%; margin-top: 10px; -webkit-appearance: none; appearance: none;
+      height: 9px; border-radius: 999px; background: rgba(24, 28, 34, 0.15); outline: none;
+    }
+    input[type="range"].gold-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 17px; height: 17px; border-radius: 50%;
+      background: var(--eg-gold-brushed); border: 2px solid #fff8eb; cursor: pointer;
+    }
+
+    /* Streams Canvas */
+    .streams-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+    .streams-title { font-family: var(--eg-font-serif); font-size: 19px; color: var(--eg-cream); }
+    .streams-wrap {
+      position: relative; border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(212, 175, 55, 0.2); background: #0f1318;
+    }
+    .streams-wrap canvas { width: 100%; height: 100%; display: block; }
+    .streams-overlay {
+      position: absolute; right: 12px; top: 12px; bottom: 12px;
+      display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; text-align: right;
+    }
+    .kpi-box {
+      background: rgba(18, 22, 28, 0.84); border: 1px solid rgba(212, 175, 55, 0.28);
+      border-radius: 10px; padding: 6px 10px;
+    }
+    .kpi-label { font-size: 11px; color: var(--eg-muted); }
+    .kpi-val { font-size: 12px; font-weight: 600; color: var(--eg-gold-soft); font-variant-numeric: tabular-nums; }
+
+    .section-kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--eg-gold-soft); font-weight: 600; }
+    .list-row {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 0; font-size: 12px; border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    }
+    .list-row:last-child { border-bottom: none; }
+    .opt-row {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 12px; border-radius: 10px; font-size: 12px; background: var(--eg-bg-elevated);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="toolbar">
+      <div class="brand">
+        <span class="brand-mark">E</span>
+        <div>
+          <div class="brand-title">Editorial Gold · Wiederverwendbare UI-Vorlage</div>
+          <div class="brand-sub">Eigenständige Mock-Seite (0 CDN-Abhängigkeiten) · Farben über <code>:root</code> oben anpassbar</div>
+        </div>
+      </div>
+      <div class="device-switch">
+        <span class="device-switch-label">Gerät:</span>
+        <button data-device="desktop" class="pill-btn active">Desktop</button>
+        <button data-device="tablet" class="pill-btn">Tablet</button>
+        <button data-device="mobile" class="pill-btn">Handy</button>
+      </div>
+    </div>
+
+    <div id="shell" class="shell shell-desktop">
+      <div class="app-frame">
+        <aside id="sidebar" class="sidebar">
+          <div>
+            <div class="sidebar-kicker">Editorial Gold</div>
+            <button data-device-nav="desktop" class="nav-btn active">▣ Übersicht (Desktop)</button>
+            <button data-device-nav="tablet" class="nav-btn">▭ Atelier (Tablet)</button>
+            <button data-device-nav="mobile" class="nav-btn">▯ Atelier (Handy)</button>
+          </div>
+          <div class="theme-pill">Theme: <strong style="color: var(--eg-gold-soft)">Editorial Gold</strong></div>
+        </aside>
+
+        <main class="main">
+          <header class="topbar">
+            <div class="tabs">
+              <button data-view="home" class="tab-btn active">Home</button>
+              <button data-view="rooms" class="tab-btn">Räume</button>
+              <button data-view="media" class="tab-btn">Medien</button>
+              <button data-view="status" class="tab-btn">Status &amp; Sicherheit</button>
+            </div>
+            <span id="deviceBadge" class="badge">Desktop · lovelace</span>
+          </header>
+          <div id="viewBody" class="view-body"></div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       MOCK DATA · Für neue Projekte einfach diese Datenstruktur ersetzen.
+       ========================================================================= */
+    const MOCK_DATA = {
+      brandTitle: "ATELIER HOME",
+      personLabel: "Gastgeber · Anwesend",
+      weatherLabel: "Klar · 14 °C",
+      lights: [
+        { id: "l1", room: "Wohnbereich", name: "Esstisch Pendel", on: true, brightness: 82, hero: true },
+        { id: "l2", room: "Küche", name: "Deckenlicht Küche", on: true, brightness: 100, hero: true },
+        { id: "l3", room: "Schlafzimmer", name: "Nachttisch Kugel", on: false, brightness: 40, hero: true },
+        { id: "l4", room: "Studio", name: "Schreibtischlampe", on: true, brightness: 68, hero: true },
+        { id: "l5", room: "Flur", name: "Akzentring", on: false, brightness: 45, hero: false },
+      ],
+      media: [
+        { id: "m1", name: "Wohnbereich Speaker", status: "Wiedergabe · Jazz Atelier", vol: 36, playing: true, primary: true },
+        { id: "m2", name: "Smart TV", status: "Standby", vol: 20, playing: false, primary: true },
+        { id: "m3", name: "Studio Speaker", status: "Bereit", vol: 28, playing: false, primary: false },
+      ],
+      mediaOptions: [
+        { name: "Nachtmodus", on: false },
+        { name: "Sprachverbesserung", on: true },
+        { name: "Loudness", on: true },
+      ],
+      doorsWindows: [
+        { name: "Eingangstür", open: false },
+        { name: "Wohnbereich Fenster", open: false },
+        { name: "Schlafzimmer Fenster", open: true },
+      ],
+      motion: [
+        { name: "Wohnbereich", active: true },
+        { name: "Küche", active: false },
+        { name: "Flur", active: false },
+      ],
+      batteries: [
+        ["Eingangstür", 94], ["Wohnbereich Fenster", 86], ["Schlafzimmer Fenster", 78],
+        ["Bewegung Wohnbereich", 89], ["Bewegung Küche", 72]
+      ],
+      network: { dl: "82.4", ul: "24.6", cpu: "49.2 °C", uptime: "12d 04h" },
+    };
+
+    const state = { device: "desktop", view: "home", guestWifi: true, assist: false };
+    let rafId = null;
+
+    const lightsOn = () => MOCK_DATA.lights.filter(l => l.on).length;
+    const doorsOpen = () => MOCK_DATA.doorsWindows.filter(d => d.open).length;
+
+    function renderChips() {
+      const open = doorsOpen();
+      const chips = [
+        { icon: "👤", label: MOCK_DATA.personLabel, accent: false },
+        { icon: "☀️", label: MOCK_DATA.weatherLabel, accent: false },
+        { icon: "💡", label: `${lightsOn()} Lichter an`, accent: lightsOn() > 0 },
+        { icon: "🛡️", label: open === 0 ? "Alles zu" : `${open} offen`, accent: open > 0 },
+      ];
+      if (state.device !== "mobile") chips.push({ icon: "🌐", label: state.guestWifi ? "Gast-WLAN an" : "WAN Online", accent: false });
+      chips.push({ icon: "🎙️", label: state.assist ? "Hört zu…" : "Assist", accent: true, id: "chipAssist" });
+
+      return `<div class="chips">${chips.map(c =>
+        `<button ${c.id ? `id="${c.id}"` : ""} class="eg-chip ${c.accent ? "accent" : ""}"><span>${c.icon}</span><span>${c.label}</span></button>`
+      ).join("")}</div>`;
+    }
+
+    function renderHero(subtitle) {
+      return `
+        <div class="eg-card hero">
+          <div class="hero-glow"></div>
+          <div class="hero-top">
+            <div>
+              <div class="hero-title">${MOCK_DATA.brandTitle}</div>
+              <div class="hero-greet">Guten Abend.</div>
+              <div class="hero-sub">${subtitle}</div>
+            </div>
+            <span class="badge">Editorial Gold</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderLightCard(l, compact = false) {
+      return `
+        <div class="eg-cream-card">
+          <div class="light-head">
+            <button data-toggle-light="${l.id}" class="light-btn">
+              <span class="light-icon ${l.on ? "on" : ""}">💡</span>
+              <div style="min-width:0">
+                <div class="light-name">${l.room} · ${l.name}</div>
+                <div class="light-state">${l.on ? `An · ${l.brightness}%` : "Aus"}</div>
+              </div>
+            </button>
+            <button data-toggle-light="${l.id}" class="light-pill ${l.on ? "on" : ""}">${l.on ? "An" : "Aus"}</button>
+          </div>
+          ${compact ? "" : `<input data-slider-light="${l.id}" type="range" min="5" max="100" value="${l.on ? l.brightness : 0}" class="gold-slider" />`}
+        </div>
+      `;
+    }
+
+    function renderStreams(heightPx) {
+      return `
+        <div class="eg-card">
+          <div class="streams-head">
+            <div>
+              <div class="streams-title">Golden Data Streams</div>
+              <div class="hero-sub" style="margin-top:0">Live-Telemetrie · Netzwerk, Licht &amp; Sensorik</div>
+            </div>
+            <span class="kpi-val">${MOCK_DATA.network.dl} ↓ / ${MOCK_DATA.network.ul} ↑ Mbps</span>
+          </div>
+          <div class="streams-wrap" style="height:${heightPx}px">
+            <canvas id="streamsCanvas"></canvas>
+            <div class="streams-overlay">
+              <div class="kpi-box"><div class="kpi-label">Downstream</div><div class="kpi-val">${MOCK_DATA.network.dl} Mbps</div></div>
+              <div class="kpi-box"><div class="kpi-label">Aktive Lichter</div><div class="kpi-val" style="color:var(--eg-cream)">${lightsOn()} / ${MOCK_DATA.lights.length}</div></div>
+              <div class="kpi-box"><div class="kpi-label">Kontakte offen</div><div class="kpi-val" style="color:${doorsOpen() ? "var(--eg-gold-soft)" : "var(--eg-ok)"}">${doorsOpen()} von ${MOCK_DATA.doorsWindows.length}</div></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderMedia(m) {
+      return `
+        <div class="eg-card" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <div style="min-width:0">
+            <div style="font-size:13px;font-weight:600;color:var(--eg-cream)">🔊 ${m.name}</div>
+            <div style="font-size:12px;color:var(--eg-muted);margin-top:2px">${m.playing ? m.status : "Bereit"} · ${m.vol}%</div>
+          </div>
+          <button data-toggle-media="${m.id}" class="badge">${m.playing ? "❚❚ Pause" : "▶ Play"}</button>
+        </div>
+      `;
+    }
+
+    function renderHome() {
+      const heroLights = MOCK_DATA.lights.filter(l => l.hero);
+      if (state.device === "mobile") {
+        return `
+          ${renderHero("Kompakte Mobil-Steuerung")}
+          ${renderChips()}
+          <div class="section-kicker">Schnellsteuerung</div>
+          <div class="mobile-2col">${heroLights.map(l => renderLightCard(l, true)).join("")}</div>
+          <button id="btnAllOff" class="eg-gold-btn"><div><div style="font-size:13px;font-weight:600">Alle Lichter ausschalten</div><div style="font-size:12px;color:var(--eg-muted)">Schnell-Aktion</div></div><span>⏻</span></button>
+          ${renderMedia(MOCK_DATA.media[0])}
+          ${renderStreams(200)}
+        `;
+      }
+      return `
+        ${renderChips()}
+        <div class="grid-home">
+          <div class="col-stack">
+            ${renderHero(state.device === "tablet" ? "Tablet-Ansicht · Räume & Assist" : "Alle Räume, Lichter und Assist bereit.")}
+            ${heroLights.map(l => renderLightCard(l, false)).join("")}
+            <button id="btnAllOff" class="eg-gold-btn"><div><div style="font-size:13px;font-weight:600">Alle Lichter ausschalten</div><div style="font-size:12px;color:var(--eg-muted)">Schnell-Aktion für alle Räume</div></div><span>⏻</span></button>
+            <button id="btnAssist" class="eg-gold-btn"><div><div style="font-size:13px;font-weight:600">Voice Assist</div><div style="font-size:12px;color:var(--eg-muted)">${state.assist ? "Hört zu…" : "Tippen zum Sprechen"}</div></div><span>🎙️</span></button>
+          </div>
+          <div class="col-stack">
+            ${renderStreams(state.device === "tablet" ? 250 : 295)}
+            <div class="grid-2">
+              <div class="col-stack">
+                <div class="section-kicker">Medien &amp; Klang</div>
+                ${MOCK_DATA.media.filter(m => m.primary).map(renderMedia).join("")}
+                <button id="btnGuestWifi" class="eg-card" style="display:flex;justify-content:space-between;align-items:center;font-size:13px;">
+                  <span>Gast-WLAN</span>
+                  <span class="badge">${state.guestWifi ? "An" : "Aus"}</span>
+                </button>
+              </div>
+              <div class="eg-card">
+                <div class="section-kicker" style="margin-bottom:8px">Türen &amp; Fenster</div>
+                ${MOCK_DATA.doorsWindows.map((dw, i) => `
+                  <button data-toggle-door="${i}" class="list-row">
+                    <span>${dw.name}</span>
+                    <span style="color:${dw.open ? "var(--eg-gold-soft)" : "var(--eg-ok)"}">${dw.open ? "Offen" : "Geschlossen"}</span>
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRooms() {
+      const byRoom = {};
+      MOCK_DATA.lights.forEach(l => (byRoom[l.room] = byRoom[l.room] || []).push(l));
+      return `<div class="grid-3">${Object.entries(byRoom).map(([room, list]) => `
+        <div class="eg-card col-stack">
+          <div style="font-family:var(--eg-font-serif);font-size:21px;color:var(--eg-cream)">${room}</div>
+          ${list.map(l => renderLightCard(l, false)).join("")}
+        </div>
+      `).join("")}</div>`;
+    }
+
+    function renderMediaTab() {
+      return `
+        <div class="grid-2">
+          <div class="col-stack">
+            <div class="section-kicker">Player</div>
+            ${MOCK_DATA.media.map(renderMedia).join("")}
+          </div>
+          <div class="eg-card col-stack">
+            <div class="section-kicker">Audio-Optionen</div>
+            ${MOCK_DATA.mediaOptions.map((o, i) => `
+              <button data-toggle-opt="${i}" class="opt-row">
+                <span>${o.name}</span>
+                <span style="color:${o.on ? "var(--eg-gold-soft)" : "var(--eg-muted)"}">${o.on ? "Aktiv" : "Aus"}</span>
+              </button>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderStatusTab() {
+      return `
+        <div class="grid-3">
+          <div class="eg-card col-stack">
+            <div class="section-kicker">Bewegung &amp; Sicherheit</div>
+            ${MOCK_DATA.motion.map(m => `<div class="list-row"><span>${m.name}</span><span style="color:${m.active ? "var(--eg-gold-soft)" : "var(--eg-muted)"}">${m.active ? "Erkannt" : "Ruhig"}</span></div>`).join("")}
+            <div class="list-row"><span>Rauchmelder</span><span style="color:var(--eg-ok)">Normal</span></div>
+          </div>
+          <div class="eg-card col-stack">
+            <div class="section-kicker">Gateway &amp; Netzwerk</div>
+            <div class="list-row"><span>WAN</span><span style="color:var(--eg-ok)">Verbunden</span></div>
+            <div class="list-row"><span>Durchsatz</span><span style="color:var(--eg-gold-soft)">${MOCK_DATA.network.dl} / ${MOCK_DATA.network.ul} Mbps</span></div>
+            <div class="list-row"><span>CPU-Temp</span><span>${MOCK_DATA.network.cpu}</span></div>
+            <div class="list-row"><span>Laufzeit</span><span>${MOCK_DATA.network.uptime}</span></div>
+          </div>
+          <div class="eg-card col-stack">
+            <div class="section-kicker">Batteriestände</div>
+            ${MOCK_DATA.batteries.map(([n, p]) => `<div class="list-row"><span>${n}</span><span style="color:var(--eg-cream)">${p}%</span></div>`).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function startStreams() {
+      if (rafId) cancelAnimationFrame(rafId);
+      const canvas = document.getElementById("streamsCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(300, rect.width * dpr);
+      canvas.height = Math.max(180, rect.height * dpr);
+      ctx.scale(dpr, dpr);
+      const w = rect.width, h = rect.height;
+      const lanes = [-0.28, -0.14, 0, 0.14, 0.28];
+      const particles = Array.from({ length: 40 }, (_, i) => ({ t: i / 40, speed: 0.0016 + (i % 5) * 0.0005, lane: i % 5, size: 1.5 + (i % 3) * 0.7 }));
+      const bez = (t, p0, p1, p2, p3) => { const u = 1 - t; return u*u*u*p0 + 3*u*u*t*p1 + 3*u*t*t*p2 + t*t*t*p3; };
+
+      function tick(ts) {
+        ctx.clearRect(0, 0, w, h);
+        lanes.forEach((off, i) => {
+          const y0 = h * 0.52 + off * 28, y3 = h * (0.2 + i * 0.15);
+          ctx.beginPath();
+          ctx.moveTo(0, y0);
+          ctx.bezierCurveTo(w * 0.35, y0 + Math.sin(ts * 0.001 + i) * 24, w * 0.6, y3 - 16, w * 0.78, y3);
+          ctx.strokeStyle = "rgba(212, 175, 55, 0.28)";
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+        });
+        particles.forEach(p => {
+          p.t = (p.t + p.speed) % 1;
+          const y0 = h * 0.52 + lanes[p.lane] * 28, y3 = h * (0.2 + p.lane * 0.15);
+          const x = bez(p.t, 0, w * 0.35, w * 0.6, w * 0.78);
+          const y = bez(p.t, y0, y0 + Math.sin(ts * 0.001 + p.lane) * 24, y3 - 16, y3);
+          const g = ctx.createRadialGradient(x, y, 0, x, y, p.size * 3.2);
+          g.addColorStop(0, "rgba(243,234,216,0.95)");
+          g.addColorStop(0.45, "rgba(212,175,55,0.7)");
+          g.addColorStop(1, "rgba(212,175,55,0)");
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(x, y, p.size * 3.2, 0, Math.PI * 2); ctx.fill();
+        });
+        rafId = requestAnimationFrame(tick);
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function render() {
+      const shell = document.getElementById("shell");
+      shell.className = "shell " + (
+        state.device === "tablet" ? "shell-tablet" :
+        state.device === "mobile" ? "shell-mobile is-mobile" : "shell-desktop"
+      );
+      document.getElementById("sidebar").style.display = state.device === "desktop" ? "flex" : "none";
+      document.getElementById("deviceBadge").textContent =
+        state.device === "desktop" ? "Desktop · lovelace" :
+        state.device === "tablet" ? "Tablet · tablet-home" : "Handy · mobile-home";
+
+      document.querySelectorAll("[data-device]").forEach(b => b.classList.toggle("active", b.dataset.device === state.device));
+      document.querySelectorAll("[data-device-nav]").forEach(b => b.classList.toggle("active", b.dataset.deviceNav === state.device));
+      document.querySelectorAll("[data-view]").forEach(b => b.classList.toggle("active", b.dataset.view === state.view));
+
+      const body = document.getElementById("viewBody");
+      body.innerHTML = state.view === "home" ? renderHome() :
+                       state.view === "rooms" ? renderRooms() :
+                       state.view === "media" ? renderMediaTab() : renderStatusTab();
+
+      document.querySelectorAll("[data-toggle-light]").forEach(el => el.onclick = () => {
+        const l = MOCK_DATA.lights.find(x => x.id === el.dataset.toggleLight);
+        if (l) { l.on = !l.on; render(); }
+      });
+      document.querySelectorAll("[data-slider-light]").forEach(el => {
+        el.oninput = e => {
+          const l = MOCK_DATA.lights.find(x => x.id === el.dataset.sliderLight);
+          if (l) { l.brightness = Number(e.target.value); l.on = l.brightness > 0; }
+        };
+        el.onchange = () => render();
+      });
+      document.querySelectorAll("[data-toggle-media]").forEach(el => el.onclick = () => {
+        const m = MOCK_DATA.media.find(x => x.id === el.dataset.toggleMedia);
+        if (m) { m.playing = !m.playing; render(); }
+      });
+      document.querySelectorAll("[data-toggle-door]").forEach(el => el.onclick = () => {
+        const d = MOCK_DATA.doorsWindows[Number(el.dataset.toggleDoor)];
+        if (d) { d.open = !d.open; render(); }
+      });
+      document.querySelectorAll("[data-toggle-opt]").forEach(el => el.onclick = () => {
+        const o = MOCK_DATA.mediaOptions[Number(el.dataset.toggleOpt)];
+        if (o) { o.on = !o.on; render(); }
+      });
+      const allOff = document.getElementById("btnAllOff");
+      if (allOff) allOff.onclick = () => { MOCK_DATA.lights.forEach(l => l.on = false); render(); };
+      const assist = document.getElementById("btnAssist");
+      if (assist) assist.onclick = () => { state.assist = !state.assist; render(); };
+      const chipAssist = document.getElementById("chipAssist");
+      if (chipAssist) chipAssist.onclick = () => { state.assist = !state.assist; render(); };
+      const wifi = document.getElementById("btnGuestWifi");
+      if (wifi) wifi.onclick = () => { state.guestWifi = !state.guestWifi; render(); };
+
+      if (state.view === "home") requestAnimationFrame(startStreams);
+      else if (rafId) cancelAnimationFrame(rafId);
+    }
+
+    document.querySelectorAll("[data-device]").forEach(b => b.onclick = () => { state.device = b.dataset.device; render(); });
+    document.querySelectorAll("[data-device-nav]").forEach(b => b.onclick = () => { state.device = b.dataset.deviceNav; render(); });
+    document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => { state.view = b.dataset.view; render(); });
+    window.addEventListener("resize", () => { if (state.view === "home") startStreams(); });
+    render();
+  </script>
+</body>
+</html>
+

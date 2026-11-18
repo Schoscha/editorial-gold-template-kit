@@ -1,0 +1,229 @@
+{
+  "project_id": "editorial_gold_demo",
+  "project_title": "Atelier Home",
+  "theme": "Editorial Gold",
+  "dashboards": {
+    "desktop": {
+      "id": "lovelace",
+      "url_path": "lovelace",
+      "title": "Übersicht",
+      "icon": "mdi:view-dashboard"
+    },
+    "tablet": {
+      "id": "tablet_home",
+      "url_path": "tablet-home",
+      "title": "Atelier (Tablet)",
+      "icon": "mdi:tablet-dashboard"
+    },
+    "mobile": {
+      "id": "mobile_home",
+      "url_path": "mobile-home",
+      "title": "Atelier (Handy)",
+      "icon": "mdi:cellphone"
+    }
+  },
+  "header": {
+    "person": {
+      "entity": "person.demo_resident",
+      "name": "Gastgeber"
+    },
+    "weather": {
+      "entity": "weather.home",
+      "name": "Wetter"
+    },
+    "sun": {
+      "entity": "sun.sun",
+      "name": "Sonne"
+    },
+    "backup": {
+      "entity": "sensor.backup_state",
+      "name": "Backup",
+      "last_ok": "sensor.backup_last_ok",
+      "next_run": "sensor.backup_next_run"
+    },
+    "phone_battery": {
+      "entity": "sensor.mobile_battery_level",
+      "name": "Handy Akku"
+    },
+    "android_auto": {
+      "entity": "binary_sensor.car_connected",
+      "name": "Fahrzeug"
+    },
+    "zigbee_bridge": {
+      "entity": "binary_sensor.zigbee_bridge_state",
+      "name": "Zigbee Bridge",
+      "permit_join": "switch.zigbee_permit_join"
+    },
+    "voice": {
+      "entity": "conversation.home_assistant",
+      "name": "Voice Assist",
+      "satellite": "assist_satellite.studio_voice"
+    }
+  },
+  "rooms": [
+    {
+      "id": "living",
+      "name": "Wohnbereich",
+      "icon": "mdi:sofa-outline",
+      "lights": [
+        {
+          "entity": "light.living_pendant",
+          "name": "Esstisch Pendel",
+          "icon": "mdi:ceiling-light",
+          "dimmable": true,
+          "color": true
+        }
+      ],
+      "sensors": [
+        {
+          "entity": "binary_sensor.living_motion",
+          "name": "Bewegung Wohnbereich",
+          "icon": "mdi:motion-sensor"
+        },
+        {
+          "entity": "binary_sensor.living_window_right",
+          "name": "Fenster Rechts",
+          "icon": "mdi:window-closed-variant"
+        }
+      ],
+      "switches": []
+    },
+    {
+      "id": "kitchen",
+      "name": "Küche",
+      "icon": "mdi:silverware-fork-knife",
+      "lights": [
+        {
+          "entity": "light.kitchen_ceiling",
+          "name": "Deckenlicht Küche",
+          "icon": "mdi:ceiling-light-outline",
+          "dimmable": true,
+          "color": true
+        }
+      ],
+      "sensors": [
+        {
+          "entity": "binary_sensor.kitchen_motion",
+          "name": "Bewegung Küche",
+          "icon": "mdi:motion-sensor"
+        }
+      ],
+      "switches": []
+    },
+    {
+      "id": "bedroom",
+      "name": "Schlafzimmer",
+      "icon": "mdi:bed-king-outline",
+      "lights": [
+        {
+          "entity": "light.bedroom_sphere",
+          "name": "Nachttisch Kugel",
+          "icon": "mdi:globe-light",
+          "dimmable": true,
+          "color": true
+        }
+      ],
+      "sensors": [
+        {
+          "entity": "binary_sensor.bedroom_window",
+          "name": "Fenster Schlafzimmer",
+          "icon": "mdi:window-closed-variant"
+        },
+        {
+          "entity": "binary_sensor.bedroom_smoke",
+          "name": "Rauchmelder",
+          "icon": "mdi:smoke-detector-variant"
+        }
+      ],
+      "switches": []
+    },
+    {
+      "id": "studio",
+      "name": "Studio & Flur",
+      "icon": "mdi:desk-lamp",
+      "lights": [
+        {
+          "entity": "light.studio_desk_lamp",
+          "name": "Schreibtischlampe",
+          "icon": "mdi:desk-lamp",
+          "dimmable": true,
+          "color": true
+        },
+        {
+          "entity": "light.hallway_accent_ring",
+          "name": "Flur Akzentring",
+          "icon": "mdi:led-strip-variant",
+          "dimmable": true,
+          "color": true,
+          "hero": false
+        }
+      ],
+      "sensors": [
+        {
+          "entity": "binary_sensor.front_door",
+          "name": "Eingangstür",
+          "icon": "mdi:door"
+        }
+      ],
+      "switches": []
+    }
+  ],
+  "media_players": [
+    {
+      "entity": "media_player.living_speaker",
+      "name": "Wohnbereich Speaker",
+      "icon": "mdi:speaker",
+      "primary": true
+    },
+    {
+      "entity": "media_player.living_tv",
+      "name": "Smart TV",
+      "icon": "mdi:television",
+      "primary": true
+    },
+    {
+      "entity": "media_player.studio_speaker",
+      "name": "Studio Speaker",
+      "icon": "mdi:speaker-wireless",
+      "primary": false
+    }
+  ],
+  "media_options": [
+    {"entity": "switch.speaker_night_sound", "name": "Nachtmodus"},
+    {"entity": "switch.speaker_speech_enhancement", "name": "Sprachverbesserung"},
+    {"entity": "switch.speaker_loudness", "name": "Loudness"}
+  ],
+  "security": {
+    "doors_windows": [
+      {"entity": "binary_sensor.front_door", "name": "Eingangstür"},
+      {"entity": "binary_sensor.living_window_right", "name": "Wohnbereich Fenster"},
+      {"entity": "binary_sensor.bedroom_window", "name": "Schlafzimmer Fenster"}
+    ],
+    "alarms": [
+      {"entity": "binary_sensor.bedroom_smoke", "name": "Rauchmelder Schlafzimmer"}
+    ],
+    "motion": [
+      {"entity": "binary_sensor.living_motion", "name": "Wohnbereich"},
+      {"entity": "binary_sensor.kitchen_motion", "name": "Küche"}
+    ]
+  },
+  "network": {
+    "wan_status": "binary_sensor.gateway_wan_status",
+    "guest_wifi": "switch.gateway_guest_wifi",
+    "wifi_24": "switch.gateway_wifi_24",
+    "wifi_5": "switch.gateway_wifi_5",
+    "download_speed": "sensor.gateway_download",
+    "upload_speed": "sensor.gateway_upload",
+    "external_ip": "sensor.gateway_external_ip",
+    "cpu_temp": "sensor.gateway_cpu_temp",
+    "uptime": "sensor.gateway_uptime"
+  },
+  "batteries": [
+    {"entity": "sensor.front_door_battery", "name": "Eingangstür"},
+    {"entity": "sensor.living_window_battery", "name": "Wohnbereich Fenster"},
+    {"entity": "sensor.bedroom_window_battery", "name": "Schlafzimmer Fenster"},
+    {"entity": "sensor.living_motion_battery", "name": "Bewegung Wohnbereich"},
+    {"entity": "sensor.kitchen_motion_battery", "name": "Bewegung Küche"}
+  ]
+}
+
